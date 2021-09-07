@@ -4,7 +4,8 @@
   "description": "おじさんblogの退避環境 # taihi-blog.ojisan.io",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:ci": "eslint 'src/**/*.{js,ts,tsx,jsx,json}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,ts,tsx,jsx,json}'"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,11 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.20",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.25.1",
+    "prettier": "^2.3.2",
     "typescript": "^4.4.2"
   }
 }

@@ -20,5 +20,6 @@ module.exports = {
   rules: {
     // Q: 明示的にoffにする必要しなくてもいい方法はないか？いまどき import React なくても動くじゃんという。
     "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
   },
 };

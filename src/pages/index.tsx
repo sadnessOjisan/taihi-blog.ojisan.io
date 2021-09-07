@@ -19,7 +19,7 @@ const Root: VFC<Props> = (props) => {
       <h1>blog.ojisan.io</h1>
       <div>
         {props.posts.map((p) => (
-          <div>
+          <div key={p.slug}>
             <a href={p.slug}>
               <div>
                 <p>{JSON.stringify(p.frontmatter)}</p>

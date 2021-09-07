@@ -7,7 +7,8 @@
     "lint:ci": "eslint 'src/**/*.{js,ts,tsx,jsx,json}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,ts,tsx,jsx,json}'",
     "format:ci": "prettier --check 'src/**/*.{js,ts,tsx,jsx,json}'",
-    "format:fix": "prettier --write 'src/**/*.{js,ts,tsx,jsx,json}'"
+    "format:fix": "prettier --write 'src/**/*.{js,ts,tsx,jsx,json}'",
+    "typecheck:ci": "tsc --noEmit"
   },
   "repository": {
     "type": "git",

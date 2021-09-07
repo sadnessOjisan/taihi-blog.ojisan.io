@@ -1,0 +1,28 @@
+{
+  "name": "taihi-blog.ojisan.io",
+  "version": "1.0.0",
+  "description": "おじさんblogの退避環境 # taihi-blog.ojisan.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sadnessOjisan/taihi-blog.ojisan.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sadnessOjisan/taihi-blog.ojisan.io/issues"
+  },
+  "homepage": "https://github.com/sadnessOjisan/taihi-blog.ojisan.io#readme",
+  "dependencies": {
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.20",
+    "typescript": "^4.4.2"
+  }
+}

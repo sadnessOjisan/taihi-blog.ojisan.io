@@ -1,3 +1,3 @@
 # taihi-blog.ojisan.io
-おじさんblogの退避環境
-# taihi-blog.ojisan.io
+
+おじさん blog の退避環境

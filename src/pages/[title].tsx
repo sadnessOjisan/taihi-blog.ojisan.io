@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import marked from "marked";
 
 const Post = (props) => {
   return (
@@ -48,10 +49,18 @@ export const getStaticProps = ({ params: { title } }) => {
     console.info("title", title);
     throw new Error("no content");
   }
+  const rerender = new marked.Renderer();
+  rerender.image = (href) => {
+    return `<img src=${
+      require("/src/contents/20200610-1st-blog-stack/visual.png").default
+    }} />`;
+  };
   return {
     props: {
       frontmatter: fileContent.data,
-      content: fileContent.content,
+      content: marked(fileContent.content, {
+        renderer: rerender,
+      }),
     },
   };
 };

@@ -36,7 +36,7 @@ const Template: VFC<PageProps<DataProps>> = (props) => {
 
   return (
     <Layout>
-      <Seo title={title} description={excerpt} />
+      <Seo title={title} description={excerpt} image={fluid.src} />
       <div className="blog-post">
         <h1>{frontmatter.title}</h1>
         <Img fluid={fluid as FluidObject} />

@@ -7,7 +7,7 @@
 
 import "./layout.css";
 
-import { graphql,useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { FC } from "react";
@@ -48,9 +48,15 @@ const Layout: FC = ({ children }) => {
             marginTop: `2rem`,
           }}
         >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
+          <div>
+            please HELP ME!!{" "}
+            <a href="https://patron.ojisan.io">patron.ojisan.io</a>
+          </div>
+          <div style={{ marginTop: 12 }}>
+            © {new Date().getFullYear()}, Built with
+            {` `}
+            <a href="https://www.gatsbyjs.com">Gatsby</a>
+          </div>
         </footer>
       </div>
     </>

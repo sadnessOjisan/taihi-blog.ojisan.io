@@ -32,7 +32,11 @@ export const pageQuery = graphql`
         visual {
           childImageSharp {
             fluid(maxWidth: 800) {
-              ...GatsbyImageSharpFluid
+              base64
+              aspectRatio
+              src
+              srcSet
+              sizes
             }
           }
         }

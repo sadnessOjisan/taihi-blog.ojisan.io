@@ -1,6 +1,6 @@
 // If you don't want to use TypeScript you can delete this file!
+import { graphql, Link, PageProps } from "gatsby";
 import * as React from "react";
-import { PageProps, Link, graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import Seo from "../components/seo";
@@ -9,7 +9,7 @@ import { BlogPostsQuery } from "../types/graphql-type";
 type DataProps = BlogPostsQuery;
 
 const UsingTypescript: React.FC<PageProps<DataProps>> = (props) => {
-  const nodes = props.data.allMarkdownRemark.nodes;
+  const nodes = props.data.blogs.nodes;
   return (
     <Layout>
       <Seo title="blog.ojisan.io" />
@@ -39,14 +39,27 @@ export default UsingTypescript;
 
 export const query = graphql`
   query BlogPosts {
-    allMarkdownRemark {
+    blogs: allMarkdownRemark(
+      sort: { order: DESC, fields: frontmatter___created }
+    ) {
       nodes {
         frontmatter {
           title
           path
           created
+          visual {
+            childImageSharp {
+              fluid {
+                base64
+                tracedSVG
+                srcWebp
+                srcSetWebp
+                originalImg
+                originalName
+              }
+            }
+          }
         }
-        html
       }
     }
   }

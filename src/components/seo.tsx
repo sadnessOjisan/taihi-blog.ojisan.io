@@ -1,14 +1,16 @@
+import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
+
 import { SeoSiteQuery } from "../types/graphql-type";
 
 type Props = {
   description?: string;
   title: string;
+  image?: string;
 };
 
-const Seo: React.VFC<Props> = ({ description, title }) => {
+const Seo: React.VFC<Props> = ({ image, description, title }) => {
   const { site } = useStaticQuery<SeoSiteQuery>(
     graphql`
       query SeoSite {
@@ -81,6 +83,10 @@ const Seo: React.VFC<Props> = ({ description, title }) => {
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          name: `twitter:image`,
+          content: image,
         },
       ]}
     />

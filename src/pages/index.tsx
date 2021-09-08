@@ -1,57 +1,47 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { GetStaticProps } from "next";
-import { VFC } from "react";
+// If you don't want to use TypeScript you can delete this file!
+import * as React from "react";
+import { PageProps, Link, graphql } from "gatsby";
 
-type Props = {
-  posts: {
-    slug: string;
-    frontmatter: {
-      [key: string]: any;
-    };
-  }[];
+import Layout from "../components/layout";
+import Seo from "../components/seo";
+
+type DataProps = {
+  allMarkdownRemark: {
+    nodes: {
+      frontmatter: { title: string; path: string; created: string };
+      html: string;
+    }[];
+  };
 };
 
-const Root: VFC<Props> = (props) => {
+const UsingTypescript: React.FC<PageProps<DataProps>> = (props) => {
   return (
-    <div>
-      <h1>blog.ojisan.io</h1>
-      <div>
-        {props.posts.map((p) => (
-          <div key={p.slug}>
-            <a href={p.slug}>
-              <div>
-                <p>{JSON.stringify(p.frontmatter)}</p>
-              </div>
-            </a>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Layout>
+      <Seo title="Using TypeScript" />
+      <h1>Gatsby supports TypeScript by default!</h1>
+      {props.data.allMarkdownRemark.nodes.map((node) => (
+        <Link key={node.frontmatter.path} to={node.frontmatter.path}>
+          <div>{node.frontmatter.title}</div>
+        </Link>
+      ))}
+      <Link to="/">Go back to the homepage</Link>
+    </Layout>
   );
 };
 
-export default Root;
+export default UsingTypescript;
 
-export const getStaticProps: GetStaticProps<Props> = () => {
-  const files = fs.readdirSync(path.join("src/contents"));
-  const posts = files.map((slug) => {
-    const markdownWithMeta = fs.readFileSync(
-      path.join("src", "contents", slug, "index.md"),
-      "utf-8"
-    );
-
-    const { data: frontmatter } = matter(markdownWithMeta);
-
-    return {
-      slug,
-      frontmatter,
-    };
-  });
-  return {
-    props: {
-      posts,
-    },
-  };
-};
+export const query = graphql`
+  {
+    allMarkdownRemark {
+      nodes {
+        frontmatter {
+          title
+          path
+          created
+        }
+        html
+      }
+    }
+  }
+`;

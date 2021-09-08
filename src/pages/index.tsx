@@ -17,8 +17,8 @@ type DataProps = {
 const UsingTypescript: React.FC<PageProps<DataProps>> = (props) => {
   return (
     <Layout>
-      <Seo title="Using TypeScript" />
-      <h1>Gatsby supports TypeScript by default!</h1>
+      <Seo title="blog.ojisan.io" />
+      <h1>本番が壊れた時の退避 環境</h1>
       {props.data.allMarkdownRemark.nodes.map((node) => (
         <Link key={node.frontmatter.path} to={node.frontmatter.path}>
           <div>{node.frontmatter.title}</div>

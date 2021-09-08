@@ -3684,7 +3684,7 @@ export type BlogPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type BlogPostsQuery = { blogs: { nodes: Array<{ frontmatter?: Maybe<(
-        Pick<MarkdownRemarkFrontmatter, 'title' | 'path' | 'created' | 'userId'>
+        Pick<MarkdownRemarkFrontmatter, 'title' | 'path' | 'created'>
         & { visual?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<Pick<ImageSharpFluid, 'base64' | 'tracedSVG' | 'srcWebp' | 'srcSetWebp' | 'originalImg' | 'originalName'>> }> }> }
       )> }> } };
 

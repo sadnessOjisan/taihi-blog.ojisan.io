@@ -3,11 +3,10 @@ import { graphql, PageProps } from "gatsby";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import { BlogPostQuery } from "../types/graphql-type";
-// import Img from "gatsby-image";
+import Img, { FluidObject } from "gatsby-image";
 
 type DataProps = BlogPostQuery;
 
-// FIXME: any
 const Template: VFC<PageProps<DataProps>> = (props) => {
   const { markdownRemark } = props.data; // data.markdownRemark holds your post data
   const { frontmatter, html, excerpt } = markdownRemark || {};
@@ -21,16 +20,25 @@ const Template: VFC<PageProps<DataProps>> = (props) => {
   )
     throw new Error("should be");
 
-  const { title } = frontmatter;
+  const { title, visual } = frontmatter;
 
-  if (title === null || title === undefined) throw new Error("should be");
+  if (
+    title === null ||
+    title === undefined ||
+    visual === null ||
+    visual === undefined
+  )
+    throw new Error("should be");
+
+  const { fluid } = visual.childImageSharp || {};
+  if (fluid === null || fluid === undefined) throw new Error("should be");
 
   return (
     <Layout>
       <Seo title={title} description={excerpt} />
       <div className="blog-post">
         <h1>{frontmatter.title}</h1>
-        {/* <Img fluid={frontmatter.visual.childImageSharp.fluid} /> */}
+        <Img fluid={fluid as FluidObject} />
         <div
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}

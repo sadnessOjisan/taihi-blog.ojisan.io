@@ -9,7 +9,11 @@
     "format:ci": "prettier --check 'src/**/*.{js,ts,tsx,jsx,json}'",
     "format:fix": "prettier --write 'src/**/*.{js,ts,tsx,jsx,json}'",
     "typecheck:ci": "tsc --noEmit",
-    "dev": "gatsby develop"
+    "build": "gatsby build",
+    "dev": "gatsby develop",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
   },
   "repository": {
     "type": "git",

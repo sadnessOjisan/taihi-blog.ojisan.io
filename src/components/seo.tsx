@@ -8,6 +8,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
+import { SeoSiteQuery } from "../types/graphql-type";
 
 type Props = {
   description: string;
@@ -15,9 +16,9 @@ type Props = {
 };
 
 const Seo: React.VFC<Props> = ({ description, title }) => {
-  const { site } = useStaticQuery(
+  const { site } = useStaticQuery<SeoSiteQuery>(
     graphql`
-      query {
+      query SeoSite {
         site {
           siteMetadata {
             title
@@ -28,9 +29,25 @@ const Seo: React.VFC<Props> = ({ description, title }) => {
       }
     `
   );
+  const {
+    title: gqlTitle,
+    description: gqlDescription,
+    author: gqlAuthor,
+  } = site?.siteMetadata || {};
 
-  const metaDescription = description || site.siteMetadata.description;
-  const defaultTitle = site.siteMetadata?.title;
+  const metaDescription = description || gqlDescription;
+  const defaultTitle = gqlTitle;
+
+  if (
+    metaDescription === undefined ||
+    metaDescription === null ||
+    defaultTitle === undefined ||
+    defaultTitle === null ||
+    gqlAuthor === undefined ||
+    gqlAuthor === null
+  ) {
+    throw new Error();
+  }
 
   return (
     <Helmet
@@ -38,7 +55,7 @@ const Seo: React.VFC<Props> = ({ description, title }) => {
         lang: "ja",
       }}
       title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      titleTemplate={`%s | ${defaultTitle}`}
       meta={[
         {
           name: `description`,
@@ -62,7 +79,7 @@ const Seo: React.VFC<Props> = ({ description, title }) => {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
+          content: gqlAuthor,
         },
         {
           name: `twitter:title`,

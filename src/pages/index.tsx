@@ -1,5 +1,5 @@
 // If you don't want to use TypeScript you can delete this file!
-import { graphql,Link, PageProps } from "gatsby";
+import { graphql, Link, PageProps } from "gatsby";
 import * as React from "react";
 
 import Layout from "../components/layout";
@@ -39,14 +39,27 @@ export default UsingTypescript;
 
 export const query = graphql`
   query BlogPosts {
-    allMarkdownRemark {
+    blogs: allMarkdownRemark(
+      sort: { order: DESC, fields: frontmatter___created }
+    ) {
       nodes {
         frontmatter {
           title
           path
           created
+          visual {
+            childImageSharp {
+              fluid {
+                base64
+                tracedSVG
+                srcWebp
+                srcSetWebp
+                originalImg
+                originalName
+              }
+            }
+          }
         }
-        html
       }
     }
   }

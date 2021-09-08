@@ -1,8 +1,12 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { Link } from "gatsby";
+import { VFC } from "react";
 
-const Header = ({ siteTitle }) => (
+type Props = {
+  siteTitle: string;
+};
+
+const Header: VFC<Props> = ({ siteTitle }) => (
   <header
     style={{
       background: `black`,
@@ -30,13 +34,5 @@ const Header = ({ siteTitle }) => (
     </div>
   </header>
 );
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-};
-
-Header.defaultProps = {
-  siteTitle: ``,
-};
 
 export default Header;

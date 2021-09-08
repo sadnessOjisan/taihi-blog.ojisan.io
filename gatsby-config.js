@@ -59,9 +59,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingIds: [
-          "UA-119542494-2", // Google Analytics / GA
-        ],
+        trackingIds: ["UA-119542494-2"],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-graphql-codegen`,
+      options: {
+        fileName: `./src/types/graphql-type.ts`,
       },
     },
   ],

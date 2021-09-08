@@ -1,19 +1,44 @@
-import React from "react";
-import { graphql } from "gatsby";
+import React, { VFC } from "react";
+import { graphql, PageProps } from "gatsby";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-// import Img from "gatsby-image";
+import { BlogPostQuery } from "../types/graphql-type";
+import Img, { FluidObject } from "gatsby-image";
 
-// FIXME: any
-export default function Template(props: any) {
+type DataProps = BlogPostQuery;
+
+const Template: VFC<PageProps<DataProps>> = (props) => {
   const { markdownRemark } = props.data; // data.markdownRemark holds your post data
-  const { frontmatter, html, excerpt } = markdownRemark;
+  const { frontmatter, html, excerpt } = markdownRemark || {};
+  if (
+    frontmatter === null ||
+    frontmatter === undefined ||
+    html === null ||
+    html === undefined ||
+    excerpt === null ||
+    excerpt === undefined
+  )
+    throw new Error("should be");
+
+  const { title, visual } = frontmatter;
+
+  if (
+    title === null ||
+    title === undefined ||
+    visual === null ||
+    visual === undefined
+  )
+    throw new Error("should be");
+
+  const { fluid } = visual.childImageSharp || {};
+  if (fluid === null || fluid === undefined) throw new Error("should be");
+
   return (
     <Layout>
-      <Seo title={frontmatter.title} description={excerpt} />
+      <Seo title={title} description={excerpt} />
       <div className="blog-post">
         <h1>{frontmatter.title}</h1>
-        {/* <Img fluid={frontmatter.visual.childImageSharp.fluid} /> */}
+        <Img fluid={fluid as FluidObject} />
         <div
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}
@@ -21,9 +46,12 @@ export default function Template(props: any) {
       </div>
     </Layout>
   );
-}
+};
+
+export default Template;
+
 export const pageQuery = graphql`
-  query ($id: String!) {
+  query BlogPost($id: String!) {
     markdownRemark(id: { eq: $id }) {
       html
       frontmatter {
@@ -32,7 +60,11 @@ export const pageQuery = graphql`
         visual {
           childImageSharp {
             fluid(maxWidth: 800) {
-              ...GatsbyImageSharpFluid
+              base64
+              aspectRatio
+              src
+              srcSet
+              sizes
             }
           }
         }

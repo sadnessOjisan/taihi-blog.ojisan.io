@@ -1,6 +1,7 @@
+import { graphql,useStaticQuery } from "gatsby";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
+
 import { SeoSiteQuery } from "../types/graphql-type";
 
 type Props = {

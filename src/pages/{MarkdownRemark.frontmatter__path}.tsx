@@ -1,9 +1,10 @@
-import React, { VFC } from "react";
 import { graphql, PageProps } from "gatsby";
+import Img, { FluidObject } from "gatsby-image";
+import React, { VFC } from "react";
+
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import { BlogPostQuery } from "../types/graphql-type";
-import Img, { FluidObject } from "gatsby-image";
 
 type DataProps = BlogPostQuery;
 

@@ -4,26 +4,32 @@ import { PageProps, Link, graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import Seo from "../components/seo";
+import { BlogPostsQuery } from "../types/graphql-type";
 
-type DataProps = {
-  allMarkdownRemark: {
-    nodes: {
-      frontmatter: { title: string; path: string; created: string };
-      html: string;
-    }[];
-  };
-};
+type DataProps = BlogPostsQuery;
 
 const UsingTypescript: React.FC<PageProps<DataProps>> = (props) => {
+  const nodes = props.data.allMarkdownRemark.nodes;
   return (
     <Layout>
       <Seo title="blog.ojisan.io" />
-      <h1>本番が壊れた時の退避 環境</h1>
-      {props.data.allMarkdownRemark.nodes.map((node) => (
-        <Link key={node.frontmatter.path} to={node.frontmatter.path}>
-          <div>{node.frontmatter.title}</div>
-        </Link>
-      ))}
+      <h1>This is 本番が壊れた時用の退避環境</h1>
+      {nodes.map((node) => {
+        const { path, title } = node.frontmatter || {};
+        if (
+          path === null ||
+          path === undefined ||
+          title === null ||
+          title === undefined
+        ) {
+          throw new Error("should be");
+        }
+        return (
+          <Link key={path} to={path}>
+            <div style={{ margin: "10px 0px" }}>{title}</div>
+          </Link>
+        );
+      })}
       <Link to="/">Go back to the homepage</Link>
     </Layout>
   );
@@ -32,7 +38,7 @@ const UsingTypescript: React.FC<PageProps<DataProps>> = (props) => {
 export default UsingTypescript;
 
 export const query = graphql`
-  {
+  query BlogPosts {
     allMarkdownRemark {
       nodes {
         frontmatter {

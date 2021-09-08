@@ -12,10 +12,11 @@ import { useStaticQuery, graphql } from "gatsby";
 import Header from "./header";
 import "./layout.css";
 import { FC } from "react";
+import { SiteTitleQuery } from "../types/graphql-type";
 
 const Layout: FC = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+  const data = useStaticQuery<SiteTitleQuery>(graphql`
+    query SiteTitle {
       site {
         siteMetadata {
           title
@@ -24,9 +25,15 @@ const Layout: FC = ({ children }) => {
     }
   `);
 
+  const title = data?.site?.siteMetadata?.title;
+
+  if (title === undefined || title === null) {
+    throw new Error("title should be");
+  }
+
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header siteTitle={title} />
       <div
         style={{
           margin: `0 auto`,

@@ -3669,34 +3669,3 @@ export type SiteBuildMetadataSortInput = {
   fields?: Maybe<Array<Maybe<SiteBuildMetadataFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
-
-export type SiteTitleQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SiteTitleQueryQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
-
-export type SeoSiteQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SeoSiteQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
-
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_1_Query = { allMarkdownRemark: { nodes: Array<(
-      Pick<MarkdownRemark, 'html'>
-      & { frontmatter?: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'path' | 'created'>> }
-    )> } };
-
-export type Unnamed_2_QueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type Unnamed_2_Query = { markdownRemark?: Maybe<(
-    Pick<MarkdownRemark, 'html' | 'excerpt'>
-    & { frontmatter?: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'title' | 'path'>
-      & { visual?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>> }> }> }
-    )> }
-  )> };

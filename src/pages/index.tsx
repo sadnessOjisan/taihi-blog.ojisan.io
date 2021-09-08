@@ -9,7 +9,7 @@ import { BlogPostsQuery } from "../types/graphql-type";
 type DataProps = BlogPostsQuery;
 
 const UsingTypescript: React.FC<PageProps<DataProps>> = (props) => {
-  const nodes = props.data.allMarkdownRemark.nodes;
+  const nodes = props.data.blogs.nodes;
   return (
     <Layout>
       <Seo title="blog.ojisan.io" />

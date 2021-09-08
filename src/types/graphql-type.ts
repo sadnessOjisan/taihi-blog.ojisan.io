@@ -3669,3 +3669,34 @@ export type SiteBuildMetadataSortInput = {
   fields?: Maybe<Array<Maybe<SiteBuildMetadataFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
+
+export type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SiteTitleQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+
+export type SeoSiteQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SeoSiteQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
+export type BlogPostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BlogPostsQuery = { allMarkdownRemark: { nodes: Array<(
+      Pick<MarkdownRemark, 'html'>
+      & { frontmatter?: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'path' | 'created'>> }
+    )> } };
+
+export type BlogPostQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type BlogPostQuery = { markdownRemark?: Maybe<(
+    Pick<MarkdownRemark, 'html' | 'excerpt'>
+    & { frontmatter?: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'path'>
+      & { visual?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>> }> }> }
+    )> }
+  )> };

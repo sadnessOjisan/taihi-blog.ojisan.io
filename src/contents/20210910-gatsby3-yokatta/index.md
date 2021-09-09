@@ -36,12 +36,12 @@ const { site } = useStaticQuery<SeoSiteQuery>(
 
 と言った感じで useStaticQuery のジェネリクスで型を指定でき、GraphQL の結果に対して型定義をかけます。
 
-`SeoSiteQuery` は graphql-codegen などで生成すれば良いです。
+`SeoSiteQuery` は [graphql-code-generator](https://www.graphql-code-generator.com/) と [gatsby-plugin-graphql-codegen](https://www.gatsbyjs.com/plugins/gatsby-plugin-graphql-codegen/)などで生成すれば良いです。
 しかしこれは 2 系時代でもありましたが、時間がかかったり、再生成されて補完が壊れたりなどの辛い面はあります。
 
 こういうデータソースに型をつけるときは zod などを使いたいのですが、Gatsby は NextJS のように getStaticProps で取得処理をビルド時に分離できないのでバリデーションするタイミングがなくて使えませんでした。（コンポーネントの中で呼ぶと再レンダリングのたびに schema validation されてパフォーマンスが落ちること懸念有）
 
-あと graphql-codegen は型が `null | undefined | T` で持つので存在チェックがめんどくさいです。これはおそらく Gatsby プラグインを使わずに graphql-codegen をそのまま使えば解決する方法もあるのですが、そうなると開発ビルドごとに型を作るなどがしづらくなるので見送りました。やはり zod が欲しいです。
+あと graphql-code-generator は型が `null | undefined | T` で持つので存在チェックがめんどくさいです。これはおそらく Gatsby プラグインを使わずに graphql-code-generator をそのまま使えば解決する方法もあるのですが、そうなると開発ビルドごとに型を作るなどがしづらくなるので見送りました。やはり zod が欲しいです。
 
 ちなみに ページコンポーネントにおける`export const query` によるデータ取得も`PageProps` という型があるので、`.data` に値が入ることがわかりやすくできます。
 

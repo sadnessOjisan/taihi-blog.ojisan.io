@@ -1,5 +1,5 @@
 ---
-path: /react-rewards-osusume
+path: /taihi-kankyo-tsukuru
 created: "2021-09-10"
 title: 退避環境のブログ作った
 visual: "./visual.png"

@@ -1,6 +1,6 @@
 ---
 path: /update-firebase-cli
-created: "2021-09-10"
+created: "2021-09-24"
 title: Firebase CLI のバージョンを最新にしたら Hosting が便利になった
 visual: "./visual.png"
 tags: ["firebase"]

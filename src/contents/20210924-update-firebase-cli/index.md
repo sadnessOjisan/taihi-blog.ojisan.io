@@ -92,4 +92,4 @@ preview 環境は、もう一つ project や site を取ってデプロイする
 
 ## おわりに
 
-定期的に CLI は更新しよう、もしくは `npx firebase` を使おう
+定期的に CLI は更新しよう、もしくは `npx firebase` を使おう。

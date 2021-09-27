@@ -145,7 +145,7 @@ export const {
 
 - デザイントークンの定義からしたい → stitches
 - コンポーネントライブラリを作る → stitches
-- アプリを作る → goober
+- アプリを作る → goober or linaria(with 覚悟)
 - 他のコンポーネントライブラリが何か CSS in JS の依存を持ってる（ex. chakra + emotion） → それで
 - バンドルサイズもパフォーマンスにこだわったところで誤差な環境 → なんでもよさそう
 

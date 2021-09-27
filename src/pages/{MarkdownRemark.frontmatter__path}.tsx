@@ -39,7 +39,10 @@ const Template: VFC<PageProps<DataProps>> = (props) => {
       <Seo title={title} description={excerpt} image={fluid.src} />
       <div className="blog-post">
         <h1>{frontmatter.title}</h1>
-        <Img fluid={fluid as FluidObject} />
+        <Img
+          fluid={fluid as FluidObject}
+          style={{ maxHeight: 500, marginBottom: 32 }}
+        />
         <div
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}

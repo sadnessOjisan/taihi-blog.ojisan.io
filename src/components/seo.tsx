@@ -88,6 +88,10 @@ const Seo: React.VFC<Props> = ({ image, description, title }) => {
           name: `twitter:image`,
           content: `https://blog.ojisan.io${image}`,
         },
+        {
+          name: `twitter:card`,
+          content: `summary_large_image`,
+        },
       ]}
     />
   );

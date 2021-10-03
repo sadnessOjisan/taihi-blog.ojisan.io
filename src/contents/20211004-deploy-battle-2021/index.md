@@ -1,7 +1,7 @@
 ---
 path: /hosting-battle-2021
 created: "2021-10-04"
-title: 実質無料で使える Hosting Service の比較 2021 (Firebase Hosting, Cloudflare Pages, Vercel, Netlify, GitHub Pages, Amplify, CloudRun)
+title: 実質無料で使える Hosting Service の比較や使い分けの紹介 2021 (Firebase Hosting, Cloudflare Pages, Vercel, Netlify, GitHub Pages, Amplify, CloudRun)
 visual: "./visual.png"
 tags: ["vercel", "netlify"]
 userId: sadnessOjisan
@@ -23,6 +23,8 @@ isProtect: false
 
 ## Firebase Hosting
 
+![Firebase Hosting](./fh.png)
+
 ### for me
 
 - 国内にエッジがある CDN を使える
@@ -36,6 +38,8 @@ isProtect: false
 - 特に思いつかないが、簡素さではブランチ連携をするだけの他のサービスに劣っており、デプロイだけが目的なときは選択しないです。
 
 ## Cloudflare Pages
+
+![Cloudflare Pages](./cp.png)
 
 ### for me
 
@@ -52,6 +56,8 @@ isProtect: false
 
 ## Vercel
 
+![Vercel](./ve.png)
+
 ### for me
 
 - ブランチ連携するだけで完結
@@ -63,6 +69,8 @@ isProtect: false
   - PRO プランならできる
 
 ## Netlify
+
+![Netlify](./netlify.png)
 
 ### for me
 
@@ -85,6 +93,8 @@ isProtect: false
 
 ## GitHub Pages
 
+![GitHub Pages](./gp.png)
+
 ### for me
 
 - GitHub Actions に yaml を置くだけでデプロイできる
@@ -93,11 +103,14 @@ isProtect: false
 ### not for me
 
 - preview がない
+  - あれば最強だと思ってる。
 - ただデプロイするだけではうまくいかないケースがある
   - NextJS の SSG や create-react-app
   - gh page 用のデプロイコマンドを使えば解決はできる
 
 ## Amplify
+
+![Amplify](./aa.png)
 
 ### for me
 
@@ -115,6 +128,8 @@ isProtect: false
 
 ## CloudRun
 
+![CloudRun](./cr.png)
+
 ### for me
 
 - GCP 上で NextJS を使いたい時の選択肢になる
@@ -125,6 +140,7 @@ isProtect: false
 
 - デプロイがめんどくさい
   - cloudbuild -> gcr -> cloudrun
+  - この手のめんどくささは GAE で解消できるがお金が・・・
   - ブランチ連携したら完結する Vercel が簡単すぎるだけ？
 
 ## 試してないけど気になっているもの
@@ -137,3 +153,5 @@ free プランが 1 サイトのみだが使えないことはない。
 ## おわりに
 
 自分は静的ページなら Firebase Hosting, SSR 必要なら Vercel という選び方にしています。
+
+みなさんの推しホスティングサービスも教えてください。

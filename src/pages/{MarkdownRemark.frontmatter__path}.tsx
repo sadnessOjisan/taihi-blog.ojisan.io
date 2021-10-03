@@ -1,4 +1,3 @@
-import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
 import { graphql, PageProps } from "gatsby";
 import Img, { FluidObject } from "gatsby-image";
 import React, { VFC } from "react";
@@ -6,8 +5,6 @@ import React, { VFC } from "react";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import { BlogPostQuery } from "../types/graphql-type";
-
-deckDeckGoHighlightElement();
 
 type DataProps = BlogPostQuery;
 

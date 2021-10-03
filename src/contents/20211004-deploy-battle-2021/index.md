@@ -11,9 +11,8 @@ isProtect: false
 
 ホスティングサービスに何を使えばいいのか分からないという話はよく目にしますし、僕もたまに思います。
 そこでこれまで自分が使ったサービスの特徴や for me, not for me な点を紹介します。
-対象は静的ページ、および NextJS を前提としたサービス選定で、Firebase Hosting, Cloudflare Pages, Vercel, Netlify, GitHub Pages, Amplify, CloudRun です。
-
-また、フリープラン前提の話であり、not for me な点は課金すれば解決するものが多いことを先に述べておきます。
+静的ページ、および NextJS を前提としたサービス選定で、Firebase Hosting, Cloudflare Pages, Vercel, Netlify, GitHub Pages, Amplify, CloudRun を紹介します。
+また、それらはフリープラン前提の話であり、not for me な点は課金すれば解決するものが多いことを先に述べておきます。
 
 ## 全てに共通していること
 
@@ -27,7 +26,9 @@ isProtect: false
 
 ### for me
 
-- 国内にエッジがある CDN を使える
+- 国内にエッジがある CDN から配信できる。
+  - 裏は多分 fastly
+  - FYI: <https://firebase.google.com/terms/subprocessors>
 - CI/CD のパイプラインを握りやすい
   - GitHub Actions を生成してくれる
   - 他のホスティングサービスもブランチ連携に頼らない方法を提供しているので実現可能だが、Firebase の強みはその yaml を生成してくれるところにあり、CI/CD の構築が実質 zero config.
@@ -43,15 +44,15 @@ isProtect: false
 
 ### for me
 
-- Analysis が無制限についてくるので PV を測れる。
-  - firebase にもあるが、あれみたいにライブラリを入れなくてよく、チェックボックスを ON にするだけでよい。
-  - fusuma をデプロイするときに使っている。スライドがどれだけ見られたかといったことが測れる。
+- Analysis が無制限についてくるので PV を測り易い。
+  - analysis は firebase にもあるが、こちらはライブラリを入れなくてよく、チェックボックスを ON にするだけでよい。
+  - Fusuma をデプロイするときに使っている。おかげでスライドがどれだけ見られたかといったことが測れる。
     - [Markdown を 黒塗りできる Monadic Parser -Darkdown-](https://darkdown-slide.pages.dev/)
 
 ### not for me
 
 - 同一レポジトリから複数サイトをデプロイできない。
-  - monorepo  にしていると厳しかったり、storybook や coverage report のデプロイに困る
+  - monorepo にしていると厳しかったり、storybook や coverage report のデプロイに困る
 - URL を自分で変えられない。やるためには初デプロイ時にレポジトリ名を修正すればできる。（名前を戻したときにリンクが壊れそう。やったことないから知りませんが。）
 
 ## Vercel
@@ -66,7 +67,7 @@ isProtect: false
 ### not for me
 
 - 自分作成以外のレポジトリを連携できない
-  - PRO プランならできる
+  - 課金すれば可能
 
 ## Netlify
 
@@ -152,6 +153,14 @@ free プランが 1 サイトのみだが使えないことはない。
 
 ## おわりに
 
-自分は静的ページなら Firebase Hosting, SSR 必要なら Vercel という選び方にしています。
+自分の選び方としては
+
+- サービスとして運営したい: Firebase Hosting
+- SSR する: Vercel
+- スライドなど、サービスではないが PV を計測したい: Cloudflare Pages
+- storybook や test coverage: Netlify
+- sandbox や実験の成果物をデプロイしたい: Github Page
+
+といった形です。
 
 みなさんの推しホスティングサービスも教えてください。

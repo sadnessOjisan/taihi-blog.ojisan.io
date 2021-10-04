@@ -39,9 +39,6 @@ module.exports = {
               ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`],
             },
           },
-          {
-            resolve: `gatsby-remark-highlight-code`,
-          },
         ],
       },
     },

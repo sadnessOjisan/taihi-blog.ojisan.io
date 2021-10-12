@@ -21,13 +21,15 @@ const Template: VFC<PageProps<DataProps>> = (props) => {
   )
     throw new Error("should be");
 
-  const { title, visual } = frontmatter;
+  const { title, visual, isProtect } = frontmatter;
 
   if (
     title === null ||
     title === undefined ||
     visual === null ||
     visual === undefined
+    isProtect === null ||
+    isProtect === undefined
   )
     throw new Error("should be");
 
@@ -36,7 +38,7 @@ const Template: VFC<PageProps<DataProps>> = (props) => {
 
   return (
     <Layout>
-      <Seo title={title} description={excerpt} image={fluid.src} />
+      <Seo title={title} description={excerpt} image={fluid.src} hatebuHeader={isProtect} />
       <div className="blog-post">
         <h1>{frontmatter.title}</h1>
         <Img

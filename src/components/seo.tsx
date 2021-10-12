@@ -8,6 +8,7 @@ type Props = {
   description?: string;
   title: string;
   image?: string;
+  hatebuHeader?: boolean;
 };
 
 const Seo: React.VFC<Props> = ({ image, description, title }) => {
@@ -92,6 +93,7 @@ const Seo: React.VFC<Props> = ({ image, description, title }) => {
           name: `twitter:card`,
           content: `summary_large_image`,
         },
+        hatebuHeader ? { name: `Hatena::Bookmark`, content: `nocomment` } : {},
       ]}
     />
   );

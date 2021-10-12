@@ -11,7 +11,7 @@ type Props = {
   hatebuHeader?: boolean;
 };
 
-const Seo: React.VFC<Props> = ({ image, description, title }) => {
+const Seo: React.VFC<Props> = ({ image, description, title, hatebuHeader }) => {
   const { site } = useStaticQuery<SeoSiteQuery>(
     graphql`
       query SeoSite {

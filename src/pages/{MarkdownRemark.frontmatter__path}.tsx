@@ -27,7 +27,7 @@ const Template: VFC<PageProps<DataProps>> = (props) => {
     title === null ||
     title === undefined ||
     visual === null ||
-    visual === undefined
+    visual === undefined ||
     isProtect === null ||
     isProtect === undefined
   )
@@ -38,7 +38,12 @@ const Template: VFC<PageProps<DataProps>> = (props) => {
 
   return (
     <Layout>
-      <Seo title={title} description={excerpt} image={fluid.src} hatebuHeader={isProtect} />
+      <Seo
+        title={title}
+        description={excerpt}
+        image={fluid.src}
+        hatebuHeader={isProtect}
+      />
       <div className="blog-post">
         <h1>{frontmatter.title}</h1>
         <Img

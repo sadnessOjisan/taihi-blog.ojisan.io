@@ -69,7 +69,7 @@ FYI: <https://blog.ojisan.io/rust-websocket>
 特にコードリーディングは何回か挑戦していますが、「なんでこの処理が必要なの？」みたいな疑問はそれなりに出ているのでそれを解消したいです。
 preact を読むくらいの地力はあり、VDOM の仕組みや概念くらいは知っていますが踏み込むと分からないことだらけです。
 
-FYI: <https://taihi-blog-ojisan-io-git-feature-add-hatebu-block-ojisan.vercel.app/preact-reading>
+FYI: <https://blog.ojisan.io/preact-reading>
 
 これに関しては、自分より React に詳しい人の時間をいただき、根掘り葉掘り聞けたら良いなくらいの温度感で考えています。
 

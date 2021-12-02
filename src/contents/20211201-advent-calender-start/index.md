@@ -1,6 +1,6 @@
 ---
 path: /sadness-advent-calendar-2021
-created: "2021-12-02"
+created: "2021-12-01"
 title: sadnessOjisan アドベントカレンダーはじめるよ
 visual: "./visual.png"
 tags: ["雑記"]

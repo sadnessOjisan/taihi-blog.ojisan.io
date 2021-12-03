@@ -1,26 +1,28 @@
 ---
-path: /sadness-advent-calendar-2021
-created: "2021-12-01"
-title: sadnessOjisan アドベントカレンダーはじめるよ
+path: /gatsby-minimumconfiguration
+created: "2021-12-03"
+title: Gatsby の最小構成
 visual: "./visual.png"
-tags: ["雑記"]
+tags: ["Gatsby"]
 userId: sadnessOjisan
 isFavorite: false
 isProtect: false
 ---
 
-「初日から遅刻してるじゃねーか」というツッコミよりも、遅れてでも書いたことを褒めてください。
+この記事は [sadnessOjisan Advent Calendar 2021](https://adventar.org/calendars/7015) 3 日目の記事です。
 
-この記事は [sadnessOjisan Advent Calendar 2021](https://adventar.org/calendars/7015) 1 日目の記事です。
+Gatsby でプロジェクトを始めるとき、`gatsby init` すると大量の依存を突っ込まれるのでそれを避ける Tips として、Gatsby の最小構成を紹介します。
 
-## なぜ 1 人で Advent Calendar
+と言ってもやることは簡単、src/pages にコンポーネントを作るだけです。
 
-1 人で書いてる人の多くはだいたい職場の上司や先輩に強要されてだと思いますが、私は自主的に始めました。
-その理由の一つとして最近ブログをサボっていたため、書くネタは溜まり続けており、それを全部放出したかったというのが挙げられます。
+## 最小構成の作り方
 
-ここ２ヶ月ほど書いていなかった理由には、最近就職して真面目に働きはじめているといったものや、プライベートでブログよりも優先することが生まれた（ここ匂わせ）などがあります。
-これらはとても便利な言い訳ですが、それに甘えていると本当にブログを書かなくなってしまうと思ったので、無理やりイベント化して書けるものは全部書いていこうと思います。
+1. npm で react, react-dom, gatsby を入れる
+2. src/pages を作り、ページコンポーネントを入れる
+3. `npx gatsby build`
 
-## 何を書くの？
+サンプルコード: https://github.com/sadnessOjisan/gatsby-min
 
-基本的には技術的な「こういう落とし穴があった！」的なものや「やってみた！」が主になるとは思いますが、久しぶりに技術に関することではないものも書く予定です。特に 12/24 の記事では、僕の身に降りかかったすごい不幸なバカ話を用意していますので乞うご期待。
+## いかがでしたか
+
+いかがでしたか？

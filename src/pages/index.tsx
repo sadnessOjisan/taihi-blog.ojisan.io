@@ -4,17 +4,14 @@ import * as React from "react";
 
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-import { BlogPostsQuery } from "../types/graphql-type";
 
-type DataProps = BlogPostsQuery;
-
-const UsingTypescript: React.FC<PageProps<DataProps>> = (props) => {
+const UsingTypescript: React.FC<PageProps<any>> = (props) => {
   const nodes = props.data.blogs.nodes;
   return (
     <Layout>
       <Seo title="blog.ojisan.io" />
       <h1>This is 本番が壊れた時用の退避環境</h1>
-      {nodes.map((node) => {
+      {nodes.map((node: any) => {
         const { path, title } = node.frontmatter || {};
         if (
           path === null ||

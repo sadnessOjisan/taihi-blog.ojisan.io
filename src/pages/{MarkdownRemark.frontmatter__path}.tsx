@@ -4,34 +4,12 @@ import React, { VFC } from "react";
 
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-import { BlogPostQuery } from "../types/graphql-type";
 
-type DataProps = BlogPostQuery;
-
-const Template: VFC<PageProps<DataProps>> = (props) => {
+const Template: VFC<PageProps<any>> = (props) => {
   const { markdownRemark } = props.data; // data.markdownRemark holds your post data
   const { frontmatter, html, excerpt } = markdownRemark || {};
-  if (
-    frontmatter === null ||
-    frontmatter === undefined ||
-    html === null ||
-    html === undefined ||
-    excerpt === null ||
-    excerpt === undefined
-  )
-    throw new Error("should be");
 
   const { title, visual, isProtect } = frontmatter;
-
-  if (
-    title === null ||
-    title === undefined ||
-    visual === null ||
-    visual === undefined ||
-    isProtect === null ||
-    isProtect === undefined
-  )
-    throw new Error("should be");
 
   const { fluid } = visual.childImageSharp || {};
   if (fluid === null || fluid === undefined) throw new Error("should be");

@@ -2,8 +2,6 @@ import { graphql, useStaticQuery } from "gatsby";
 import * as React from "react";
 import { Helmet } from "react-helmet";
 
-import { SeoSiteQuery } from "../types/graphql-type";
-
 type Props = {
   description?: string;
   title: string;
@@ -12,7 +10,7 @@ type Props = {
 };
 
 const Seo: React.VFC<Props> = ({ image, description, title, hatebuHeader }) => {
-  const { site } = useStaticQuery<SeoSiteQuery>(
+  const { site } = useStaticQuery<any>(
     graphql`
       query SeoSite {
         site {
@@ -33,17 +31,6 @@ const Seo: React.VFC<Props> = ({ image, description, title, hatebuHeader }) => {
 
   const metaDescription = description || gqlDescription;
   const defaultTitle = gqlTitle;
-
-  if (
-    metaDescription === undefined ||
-    metaDescription === null ||
-    defaultTitle === undefined ||
-    defaultTitle === null ||
-    gqlAuthor === undefined ||
-    gqlAuthor === null
-  ) {
-    throw new Error();
-  }
 
   return (
     <Helmet

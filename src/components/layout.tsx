@@ -12,11 +12,10 @@ import PropTypes from "prop-types";
 import * as React from "react";
 import { FC } from "react";
 
-import { SiteTitleQuery } from "../types/graphql-type";
 import Header from "./header";
 
 const Layout: FC = ({ children }) => {
-  const data = useStaticQuery<SiteTitleQuery>(graphql`
+  const data = useStaticQuery<any>(graphql`
     query SiteTitle {
       site {
         siteMetadata {

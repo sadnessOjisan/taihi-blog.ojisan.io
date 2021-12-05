@@ -10,7 +10,10 @@ const UsingTypescript: React.FC<PageProps<any>> = (props) => {
   return (
     <Layout>
       <Seo title="blog.ojisan.io" />
-      <h1>This is 本番が壊れた時用の退避環境</h1>
+      <h1>
+        This is <Link to="/taihi-kankyo-tsukuru">本番が壊れた</Link>
+        時用の退避環境
+      </h1>
       {nodes.map((node: any) => {
         const { path, title } = node.frontmatter || {};
         if (

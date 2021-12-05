@@ -12,6 +12,7 @@ isProtect: false
 この記事は [sadnessOjisan Advent Calendar 2021](https://adventar.org/calendars/7015) 6 日目の記事です。
 
 セマフォが欲しくて C++20 を FFI しようとしてハマり散らした記録。
+Mutex と条件変数でセマフォを実装した方がよっぽどお得だったに違いない。
 OGP は FF の ファンキットです。I ではなく XIV ですが。
 
 ## ライブラリやリンクについて

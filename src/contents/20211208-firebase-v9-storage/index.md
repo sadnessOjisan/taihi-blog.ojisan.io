@@ -93,6 +93,6 @@ uploadString(ref(storage, "hoge/fuga/piyo"), "hogeeeeeee");
 
 ## 終わりに
 
-ドキュメントを **英語版で** 見ると全部書いてるよ。
+ドキュメントを **英語版で** 見ると全部書いてある。
 
 FYI: https://firebase.google.com/docs/storage/web/start

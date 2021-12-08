@@ -1,98 +1,158 @@
 ---
-path: /gatsby-dsg-fastly
-created: "2021-12-07"
-title: Firebase v9 + cloud storage チュートリアル
+path: /rust-analyzer-neovim-lsp
+created: "2021-12-09"
+title: neovim-lsp と rust-analyzer の接続
 visual: "./visual.png"
-tags: ["Firebase"]
+tags: ["Rust", "neovim"]
 userId: sadnessOjisan
 isFavorite: false
 isProtect: false
 ---
 
-この記事は [sadnessOjisan Advent Calendar 2021](https://adventar.org/calendars/7015) 8 日目の記事です。
+この記事は [sadnessOjisan Advent Calendar 2021](https://adventar.org/calendars/7015) 9 日目の記事です。
 
-firebase v9 のリリースによって firebase SDK の記法は大幅に変わりました。
-この変更の大きな目玉は tree shaking が効きやすくなったというものですが、その代償として全てを chain して書くことができなくなり、様々な関数を組み合わせて書いていくスタイルへとなりました。
+最近諸事情で Win, Ubuntu で開発をしているため開発環境を引っ越しています。
+仕事が Mac なので毎日 3OS を切り替えて生活しており、VSC のバインドが覚えられなくて苦しんでいます。そこで OS ごとにエディタの挙動が少ないエディタとして Vim を使おうと思い、Vim に Rust の開発環境を作りはじめました。
+neovim が最近公式で LSP Client になったためそれを使っているのですが、それと rust-analyzer を接続でハマったので記事にしました。
 
-そのためドキュメントは大幅に書き換える必要があり実際書き換わっているのですが、auth や firestore と比較して利用者が少ない storage は日本語ドキュメントが書き換わっていません。
-このままだと新 API でどう書けばいいか分からないと思いますので、firebase v9 で storage を使う方法を紹介します。
+## neovim の設定
 
-また、いま初めて storage を使うという人が ~v8 のドキュメントを読まなくても良いように、cloud storage の基本的な概念や用語の解説をしながら解説します。
+neovim/lsp-config で設定します。こうなりました。
 
-## storage の構造
+```
+call plug#begin('~/.vim/plugged')
+Plug 'neovim/nvim-lspconfig'
+call plug#end()
 
-参照: ファイル、フォルダへのポインタ
+" nvim-lsp-config
+lua << EOF
+local nvim_lsp = require('lspconfig')
+local on_attach = function(client, bufnr)
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+end
 
-ファイル: データ。JS でいう File や Blob を想定しているが、文字列も保存できる
-
-フォルダ: 階層。参照を作るときに `/` で区切ることで作れる。昔は child メソッドでも作れたが v9 では `/` 区切りで作る。
-
-バケット: 開発者にとっての保存領域すべてそのもの。firebase config で設定する URL であり firebase project に紐づいている storage を設定するが、別 project の storage へのアクセスも可能になる。それにはその URL を指定した storage を作る必要がある。
-
-## 使い方
-
-default storage を作る。つまり、default のバケットを作る。
-
-```js
-import { getStorage } from "firebase/storage";
-
-const storage = getStorage();
+local servers = { 'rust_analyzer', 'tsserver', 'ccls' }
+EOF
 ```
 
-bucket 名を明示して storage を作る
+さて、これを実行すると、
 
-```js
-import { getStorage } from "firebase/storage";
+> rust-analyzer is not found
 
-const BUCKET_NAME = "gs://my-project.appspot.com";
+的なエラーが出ました。
+どうやら LSP Client がアクセスする Language Server が無いようです。
 
-export const storage = getStorage(app, BUCKET_NAME);
+なのでインストールしましょう。
+公式サイトを見るとバイナリを自分で落としてくる方法と、rustup で落としてくる方法があることを確かめました。rust-analyzer は頻繁に更新されることを知っていたので、rustup 経由で更新できるよう rustup で落としてきます。
+
+```
+rustup +nightly component add rust-analyzer-preview
 ```
 
-ファイルへの参照を作る
+さて、rust-analyzer を試してみましょう。
 
-```js
-import { ref } from "firebase/storage";
-
-const imageRef = ref(storage, `${user_name}.png`);
+```
+rust-analyzer
 ```
 
-フォルダとファイルを同時に作る
+command not found とエラーが出ました。
+DL したのに見つかりません、どういうことでしょうか。
 
-```js
-import { ref } from "firebase/storage";
+## なぜ rust-analyzer が見つからないか
 
-const userImageRef = ref(storage, `user_images/${user_name}.png`);
+rustup を最初にインストールしたとき、
+
+```
+source ~/.cargo/env
 ```
 
-上記からフォルダへの参照を作る
+というコマンドをしたと思うのですが、それが関係します。
 
-```js
-import { ref } from "firebase/storage";
+あのコマンドは、
 
-const userImagesRef = userImageRef.parent;
+```sh
+#!/bin/sh
+# rustup shell setup
+# affix colons on either side of $PATH to simplify matching
+case ":${PATH}:" in
+    *:"$HOME/.cargo/bin":*)
+        ;;
+    *)
+        # Prepending path in case a system-installed rustc needs to be overridden
+        export PATH="$HOME/.cargo/bin:$PATH"
+        ;;
+esac
 ```
 
-参照に対して画像をアップロードする
+を実行したことになっており、
 
-```js
-import { uploadBytes } from "firebase/storage";
+`~/.cargo/bin` へのパスを通しています。
 
-uploadBytes(userImageRef, file).then((snapshot) => {
-  // no op
-});
+そしてここには
+
+```sh
+rustup component add xxx
 ```
 
-文字列ファイルをアップロードする
+で入れたツールが入ることとなります。
 
-```js
-import { uploadString } from "firebase/storage";
-
-uploadString(ref(storage, "hoge/fuga/piyo"), "hogeeeeeee");
+```sh
+❯ ls ~/.cargo/bin
+cargo      cargo-clippy  cargo-miri  cargo-set-version  clippy-driver  rust-gdb   rustc    rustfmt
+cargo-add  cargo-fmt     cargo-rm    cargo-upgrade      rls            rust-lldb  rustdoc  rustup
 ```
 
-## 終わりに
+しかし、上の出力にある通り、rust-analyzer はここに入っていません。
 
-ドキュメントを **英語版で** 見ると全部書いてるよ。
+そう、実は rust-analyzer はここに入らないのです。
+つまり rust-analyzer は最初に通したパスに含まれていなかったのです。
+これに関しては Issue にもなっていますが、意図しての挙動のようです。
 
-FYI: https://firebase.google.com/docs/storage/web/start
+FYI: https://github.com/rust-lang/rustup/issues/2411#issuecomment-656519117
+
+## rust-analyzer にパスを通そう
+
+そこで rust-analyzer にパスを通す方法を考えます。
+そもそもどこに保存されているのかを調べてみましょう。
+
+```sh
+❯ rustup show
+Default host: x86_64-unknown-linux-gnu
+rustup home:  /root/.rustup
+
+installed toolchains
+--------------------
+
+stable-x86_64-unknown-linux-gnu
+nightly-x86_64-unknown-linux-gnu (default)
+
+active toolchain
+----------------
+
+nightly-x86_64-unknown-linux-gnu (default)
+rustc 1.59.0-nightly (0fb1c371d 2021-12-06)
+```
+
+どうやら、`/root/.rustup` というフォルダがあるようなのでここを見てみましょう。
+それっぽいフォルダがあるので中を見てます。
+
+```
+❯ ls ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/
+cargo  cargo-clippy  cargo-fmt  clippy-driver  rust-analyzer  rust-gdb  rust-gdbgui  rust-lldb  rustc  rustdoc  rustfmt
+```
+
+ありました、rust-analyzer です。では、ここにパスを通しましょう。
+
+```sh
+# 筆者はfishユーザー（激ウマギャグ）
+fish_add_path /root/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
+```
+
+そして vim から LSP Server に繋がるか見てみましょう。
+
+![LSP](./lsp.png)
+
+繋がりました。

@@ -12,7 +12,7 @@ isProtect: false
 この記事は [sadnessOjisan Advent Calendar 2021](https://adventar.org/calendars/7015) 9 日目の記事です。
 
 最近ド M プレイの一環で Rust と C++(FFI 目的) の開発を Win, Ubuntu でし始めたので開発環境を引っ越しています。
-仕事が Mac なので毎日 3OS を切り替えて生活しており、VSC のバインドが覚えられなくて苦しんでいます。そこで OS ごとにエディタの挙動が少ないエディタとして Vim を使おうと思い、Vim に Rust の開発環境を作りはじめました。
+仕事が Mac なので毎日 3OS を切り替えて生活しており、VSC のバインドが覚えられなくて苦しんでいます。そこで OS ごとにエディタの差異が少ないエディタとして Vim を使おうと思い、Vim に Rust の開発環境を作りはじめました。
 最近 Neovim が公式で LSP Client になったためそれを使っているのですが、それと rust-analyzer の接続でハマったのでその時のメモです。
 
 ## Neovim の設定

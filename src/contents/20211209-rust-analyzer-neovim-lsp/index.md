@@ -13,11 +13,11 @@ isProtect: false
 
 最近諸事情で Win, Ubuntu で開発をしているため開発環境を引っ越しています。
 仕事が Mac なので毎日 3OS を切り替えて生活しており、VSC のバインドが覚えられなくて苦しんでいます。そこで OS ごとにエディタの挙動が少ないエディタとして Vim を使おうと思い、Vim に Rust の開発環境を作りはじめました。
-neovim が最近公式で LSP Client になったためそれを使っているのですが、それと rust-analyzer を接続でハマったので記事にしました。
+最近 Neovim が公式で LSP Client になったためそれを使っているのですが、それと rust-analyzer の接続でハマったのでその時のメモです。
 
-## neovim の設定
+## Neovim の設定
 
-neovim/lsp-config で設定します。こうなりました。
+neovim/lsp-config で LSP を設定します。こうなりました。
 
 ```
 call plug#begin('~/.vim/plugged')
@@ -46,7 +46,7 @@ EOF
 どうやら LSP Client がアクセスする Language Server が無いようです。
 
 なのでインストールしましょう。
-公式サイトを見るとバイナリを自分で落としてくる方法と、rustup で落としてくる方法があることを確かめました。rust-analyzer は頻繁に更新されることを知っていたので、rustup 経由で更新できるよう rustup で落としてきます。
+公式サイトを見るとバイナリを自分で落としてくる方法と、rustup で落としてくる方法があります。rust-analyzer は頻繁に更新されることを知っていたので、rustup 経由で更新できるよう rustup で落としてきます。
 
 ```
 rustup +nightly component add rust-analyzer-preview
@@ -100,7 +100,7 @@ rustup component add xxx
 で入れたツールが入ることとなります。
 
 ```sh
-❯ ls ~/.cargo/bin
+> ls ~/.cargo/bin
 cargo      cargo-clippy  cargo-miri  cargo-set-version  clippy-driver  rust-gdb   rustc    rustfmt
 cargo-add  cargo-fmt     cargo-rm    cargo-upgrade      rls            rust-lldb  rustdoc  rustup
 ```
@@ -119,7 +119,7 @@ FYI: https://github.com/rust-lang/rustup/issues/2411#issuecomment-656519117
 そもそもどこに保存されているのかを調べてみましょう。
 
 ```sh
-❯ rustup show
+> rustup show
 Default host: x86_64-unknown-linux-gnu
 rustup home:  /root/.rustup
 
@@ -140,7 +140,7 @@ rustc 1.59.0-nightly (0fb1c371d 2021-12-06)
 それっぽいフォルダがあるので中を見てます。
 
 ```
-❯ ls ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/
+> ls ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/
 cargo  cargo-clippy  cargo-fmt  clippy-driver  rust-analyzer  rust-gdb  rust-gdbgui  rust-lldb  rustc  rustdoc  rustfmt
 ```
 

@@ -1,6 +1,6 @@
 ---
-path: /firebase-v9-storage
-created: "2021-12-08"
+path: /gatsby-dsg-fastly
+created: "2021-12-07"
 title: Firebase v9 + cloud storage チュートリアル
 visual: "./visual.png"
 tags: ["Firebase"]

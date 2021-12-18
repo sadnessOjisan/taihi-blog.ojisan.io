@@ -9,6 +9,13 @@ isFavorite: false
 isProtect: false
 ---
 
+ふぁっ、ふぁっ、ふぁーーんっくしょん！
+
+この記事は [sadnessOjisan Advent Calendar 2021](https://adventar.org/calendars/7015) 10 日目の記事です。
+書かれた日付は 12/18 です。
+8 日サボったのはさすがにやりすぎた。
+
+今日は onCall についてです。
 onCall を使ったときに CORS で怒られることがある。
 
 ```
@@ -27,7 +34,7 @@ export const addUserData = httpsCallable(functions, "xxx");
 addUserData({ name: "yosuke", age: 17 });
 ```
 
-### なにが嬉しいか
+## なにが嬉しいか
 
 この記法を使うことによる嬉しさは、自分でしないといけない手癖をもろもろやってくれることだ。例えば、認証や CORS があげられる。
 
@@ -52,11 +59,11 @@ context.auth.uid;
 
 このように便利だが、なぜが CORS エラーがよく発生する。その理由や対策について。
 
-### CORS のエラーじゃなくても CORS のエラーが出ているだけ
+## CORS のエラーじゃなくても CORS のエラーが出ているだけ
 
 CORS が原因で出ているのではなさそうです。存在しない関数を呼ぶとそのようなエラーが出ているようです。
 
-#### 存在しない関数名
+### 存在しない関数名
 
 ```ts
 export const route = functions
@@ -83,7 +90,7 @@ Access to fetch at 'https://asia-northeast1-nensyu-match-development.cloudfuncti
 
 のようなエラーが発生。
 
-#### Region
+### Region
 
 onCall ではデプロイするリージョンを指定できますが、その指定先と実際のリクエストの region が異なると CORS のエラーが発生。
 

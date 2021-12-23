@@ -41,4 +41,4 @@ FYI: https://store.steampowered.com/app/881100/Noita/?l=japanese
 
 ## 追記
 
-Special Thanks: Noita を僕に勧めた人、Noita をクリアするまで配信を強要させられる Discord サーバーの人たち
+Special Thanks: Noita を僕に勧めた人、Noita をクリアするまで配信を強要させられる Discord サーバーに閉じ込めた人たち

@@ -1,12 +1,12 @@
 ---
-path: /chin-chin-itai
+path: /chin-chin-itai-2021
 created: "2021-12-24"
 title: ㄘんㄘんを痛めた話
 visual: "./visual.png"
 tags: ["雑記"]
 userId: sadnessOjisan
 isFavorite: false
-isProtect: false
+isProtect: true
 ---
 
 この記事は [sadnessOjisan Advent Calendar 2021](https://adventar.org/calendars/7015) 24 日目の記事です。
